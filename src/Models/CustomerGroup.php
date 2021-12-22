@@ -13,6 +13,11 @@ class CustomerGroup extends BaseModel
     use HasFactory, HasMedia, HasDefaultRecord;
 
     /**
+     * {@inheritDoc}
+     */
+    protected $guarded = [];
+
+    /**
      * Return a new factory instance for the model.
      *
      * @return \GetCandy\Database\Factories\CustomerGroupFactory
