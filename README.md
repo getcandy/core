@@ -17,7 +17,7 @@ We put developers first and try to ensure your experience is as smooth as possib
 
 ## Documentation
 
-- [Full documentation](https://getcandy.io/docs) - Includes in-depth guides on everything GetCandy
+- [Full documentation](https://docs.getcandy.io/) - Includes in-depth guides on everything GetCandy
 
 ## License
 
