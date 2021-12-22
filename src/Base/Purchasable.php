@@ -70,4 +70,11 @@ interface Purchasable
      * @return bool
      */
     public function isShippable();
+
+    /**
+     * Return the thumbnail for the purchasable item.
+     *
+     * @return string
+     */
+    public function getThumbnail();
 }
