@@ -179,4 +179,15 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
     {
         return $this->sku;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getThumbnail()
+    {
+        if ($thumbnail = $this->product->thumbnail) {
+            return $thumbnail->getUrl('small');
+        }
+        return null;
+    }
 }
