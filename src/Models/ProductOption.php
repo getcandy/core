@@ -63,6 +63,9 @@ class ProductOption extends BaseModel
      */
     public function toSearchableArray()
     {
+        if (config('scout.driver') == 'mysql') {
+            return $this->only(array_keys($this->getAttributes()));
+        }
         return [
             'id' => $this->id,
             'name' => $this->translate('name'),
