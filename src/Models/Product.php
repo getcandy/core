@@ -144,6 +144,10 @@ class Product extends BaseModel implements SpatieHasMedia
 
     public function toSearchableArray()
     {
+        if (config('scout.driver') == 'mysql') {
+            return $this->only(array_keys($this->getAttributes()));
+        }
+
         $attributes = $this->getAttributes();
 
         $data = Arr::except($attributes, 'attribute_data');

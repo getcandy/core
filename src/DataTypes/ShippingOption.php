@@ -110,4 +110,12 @@ class ShippingOption implements Purchasable
     {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getThumbnail()
+    {
+        return null;
+    }
 }

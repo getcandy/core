@@ -175,6 +175,10 @@ class Order extends BaseModel
 
     public function toSearchableArray()
     {
+        if (config('scout.driver') == 'mysql') {
+            return $this->only(array_keys($this->getAttributes()));
+        }
+
         return [
             'id' => $this->id,
             'reference' => $this->reference,

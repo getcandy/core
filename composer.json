@@ -33,8 +33,8 @@
         "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-activitylog": "^4.1",
         "laravel/scout": "^9.3",
-        "yab/laravel-scout-mysql-driver": "^5.0",
         "cartalyst/converter": "^6.1",
+        "yab/laravel-scout-mysql-driver": "^5.0",
         "kalnoy/nestedset": "^6.0"
     },
     "require-dev": {
