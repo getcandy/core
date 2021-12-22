@@ -31,7 +31,7 @@ We put developers first and try to ensure your experience is as smooth as possib
 Install the package via composer.
 
 ```sh
-composer require getcandy/getcandy
+composer require getcandy/core
 ```
 
 Run the install command
