@@ -114,6 +114,7 @@ class InstallGetCandy extends Command
                     'thousand_point' => ',',
                     'decimal_places' => 2,
                     'default' => true,
+                    'enabled' => true,
                 ]);
             }
 
