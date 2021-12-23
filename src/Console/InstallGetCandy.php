@@ -59,8 +59,6 @@ class InstallGetCandy extends Command
 
             $this->info('Publishing hub assets');
 
-            $this->publishResources();
-
             if (! Country::count()) {
                 $this->info('Importing countries');
                 $this->call('getcandy:import:address-data');
@@ -300,12 +298,5 @@ class InstallGetCandy extends Command
         }
 
         $this->call('vendor:publish', $params);
-    }
-
-    private function publishResources()
-    {
-        $this->call('vendor:publish', [
-            '--tag' => 'getcandy:hub:public',
-        ]);
     }
 }
