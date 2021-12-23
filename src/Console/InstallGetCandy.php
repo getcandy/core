@@ -8,6 +8,7 @@ use GetCandy\Hub\Models\Staff;
 use GetCandy\Models\AttributeGroup;
 use GetCandy\Models\Channel;
 use GetCandy\Models\Collection;
+use GetCandy\Models\CollectionGroup;
 use GetCandy\Models\Country;
 use GetCandy\Models\Currency;
 use GetCandy\Models\CustomerGroup;
@@ -125,6 +126,15 @@ class InstallGetCandy extends Command
                     'name' => 'Retail',
                     'handle' => 'retail',
                     'default' => true,
+                ]);
+            }
+
+            if (!CollectionGroup::count()) {
+                $this->info('Adding an initial collection group');
+
+                CollectionGroup::create([
+                    'name' => 'Main',
+                    'handle' => 'main',
                 ]);
             }
 
