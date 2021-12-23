@@ -8,6 +8,7 @@ use GetCandy\Hub\Models\Staff;
 use GetCandy\Models\AttributeGroup;
 use GetCandy\Models\Channel;
 use GetCandy\Models\Collection;
+use GetCandy\Models\CollectionGroup;
 use GetCandy\Models\Country;
 use GetCandy\Models\Currency;
 use GetCandy\Models\CustomerGroup;
@@ -58,8 +59,6 @@ class InstallGetCandy extends Command
             }
 
             $this->info('Publishing hub assets');
-
-            $this->publishResources();
 
             if (! Country::count()) {
                 $this->info('Importing countries');
@@ -116,6 +115,7 @@ class InstallGetCandy extends Command
                     'thousand_point' => ',',
                     'decimal_places' => 2,
                     'default' => true,
+                    'enabled' => true,
                 ]);
             }
 
@@ -126,6 +126,15 @@ class InstallGetCandy extends Command
                     'name' => 'Retail',
                     'handle' => 'retail',
                     'default' => true,
+                ]);
+            }
+
+            if (!CollectionGroup::count()) {
+                $this->info('Adding an initial collection group');
+
+                CollectionGroup::create([
+                    'name' => 'Main',
+                    'handle' => 'main',
                 ]);
             }
 
@@ -300,12 +309,5 @@ class InstallGetCandy extends Command
         }
 
         $this->call('vendor:publish', $params);
-    }
-
-    private function publishResources()
-    {
-        $this->call('vendor:publish', [
-            '--tag' => 'getcandy:hub:public',
-        ]);
     }
 }
