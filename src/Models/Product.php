@@ -42,7 +42,7 @@ class Product extends BaseModel implements SpatieHasMedia
      */
     public function searchableAs()
     {
-        return 'products_'.app()->getLocale();
+        return config('scout.prefix').'products_'.app()->getLocale();
     }
 
     /**
