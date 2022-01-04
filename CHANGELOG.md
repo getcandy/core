@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 [Unreleased]
 
 ### Fixes
-- Fixes an issue where URL relationship is `elements` when it should be `element`
+- Fixes [Issue 24](https://github.com/getcandy/getcandy/issues/24) where URL relationship is `elements` when it should be `element`
 
 ## [2.0-beta2] - 2021-12-23
 ### Added
