@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+[Unreleased]
+
+### Fixes
+- Fixed an issue where `now()->year` would return an int on single digit months, but we need to have a leading zero.
+
 ## [2.0-beta3] - 2021-12-24
 ### Fixes
 - Fixed and issue where the meilisearch set up wasn't creating the indexes it needed if they didn't exist.

@@ -27,7 +27,7 @@ class OrderReferenceGenerator implements OrderReferenceGeneratorInterface
 
         $year = $order->created_at->year;
 
-        $month = $order->created_at->month;
+        $month = $order->created_at->format('m');
 
         $latest = Order::select(
                 DB::RAW('MAX(reference) as reference')
