@@ -38,11 +38,11 @@ class Url extends BaseModel
     ];
 
     /**
-     * Return the elements relationship.
+     * Return the element relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function elements()
+    public function element()
     {
         return $this->morphTo();
     }
