@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Fixes
-- Fixes [Issue 24](https://github.com/getcandy/getcandy/issues/24) where URL relationship is `elements` when it should be `element`
+- Element relationship on URL changed to `element` instead of `elements` ([#24](https://github.com/getcandy/getcandy/issues/24))
 - Fixed an issue where `now()->year` would return an int on single digit months, but we need to have a leading zero.
 - Products and product option models now take in to account the Scout prefix, if set.
 
