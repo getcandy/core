@@ -3,6 +3,7 @@
 namespace GetCandy\Console\Commands;
 
 use GetCandy\Addons\Manifest;
+use GetCandy\Models\Customer;
 use GetCandy\Models\Order;
 use GetCandy\Models\Product;
 use GetCandy\Models\ProductOption;
@@ -38,6 +39,7 @@ class MeilisearchSetup extends Command
         Product::class,
         Order::class,
         ProductOption::class,
+        Customer::class,
     ];
 
     /**
