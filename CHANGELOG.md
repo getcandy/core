@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Made customers searchable via Scout
-- Added Adresses relationship to the customer model
+- Added Addresses relationship to the customer model
 
 ### Changed
 - Customers `meta` column now uses Laravel's `casts` property and is cast to an object.
