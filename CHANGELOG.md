@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Made customers searchable via Scout
+- Added Addresses relationship to the customer model
+
+### Changed
+- Customers `meta` column now uses Laravel's `casts` property and is cast to an object.
+
 ### Fixes
 - Element relationship on URL changed to `element` instead of `elements` ([#24](https://github.com/getcandy/getcandy/issues/24))
 - Fixed an issue where `now()->year` would return an int on single digit months, but we need to have a leading zero.

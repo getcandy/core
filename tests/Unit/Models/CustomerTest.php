@@ -2,6 +2,7 @@
 
 namespace GetCandy\Tests\Unit\Models;
 
+use GetCandy\Models\Address;
 use GetCandy\Models\Channel;
 use GetCandy\Models\Customer;
 use GetCandy\Models\CustomerGroup;
@@ -144,5 +145,16 @@ class CustomerTest extends TestCase
         $customer->users()->sync($users->pluck('id'));
 
         $this->assertCount($users->count(), $customer->users);
+    }
+
+    /** @test */
+    public function can_fetch_customer_addresses()
+    {
+        $customer = Customer::factory()->create();
+        $addresses = Address::factory(2)->create([
+            'customer_id' => $customer->id,
+        ]);
+
+        $this->assertCount($addresses->count(), $customer->addresses()->get());
     }
 }
