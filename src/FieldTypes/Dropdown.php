@@ -4,9 +4,8 @@ namespace GetCandy\FieldTypes;
 
 use GetCandy\Base\FieldType;
 use GetCandy\Exceptions\FieldTypeException;
-use JsonSerializable;
 
-class Text implements FieldType, JsonSerializable
+class Dropdown implements FieldType
 {
     /**
      * @var string
@@ -14,19 +13,9 @@ class Text implements FieldType, JsonSerializable
     protected $value;
 
     /**
-     * Serialize the class.
+     * Create a new instance of List field type.
      *
-     * @return string
-     */
-    public function jsonSerialize()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Create a new instance of Text field type.
-     *
-     * @param string $value
+     * @param int|float $value
      */
     public function __construct($value = '')
     {
@@ -34,19 +23,9 @@ class Text implements FieldType, JsonSerializable
     }
 
     /**
-     * Returns the value when accessed as a string.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getValue();
-    }
-
-    /**
      * Return the value of this field.
      *
-     * @return string
+     * @return array
      */
     public function getValue()
     {
@@ -56,7 +35,7 @@ class Text implements FieldType, JsonSerializable
     /**
      * Set the value of this field.
      *
-     * @param string $value
+     * @param int|float $value
      */
     public function setValue($value)
     {
@@ -72,7 +51,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getLabel(): string
     {
-        return __('adminhub::fieldtypes.text.label');
+        return __('adminhub::fieldtypes.dropdown.label');
     }
 
     /**
@@ -80,7 +59,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getSettingsView(): string
     {
-        return 'adminhub::field-types.text.settings';
+        return 'adminhub::field-types.dropdown.settings';
     }
 
     /**
@@ -88,7 +67,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getView(): string
     {
-        return 'adminhub::field-types.text.view';
+        return 'adminhub::field-types.dropdown.view';
     }
 
     /**
@@ -97,9 +76,10 @@ class Text implements FieldType, JsonSerializable
     public function getConfig(): array
     {
         return [
-            'view'    => 'adminhub::field-types.text',
             'options' => [
-                'richtext' => 'nullable',
+                'lookups'         => 'array',
+                'lookups.*.label' => 'string|required',
+                'lookups.*.value' => 'nullable|string',
             ],
         ];
     }

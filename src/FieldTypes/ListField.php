@@ -5,19 +5,19 @@ namespace GetCandy\FieldTypes;
 use GetCandy\Base\FieldType;
 use GetCandy\Exceptions\FieldTypeException;
 
-class Number implements FieldType
+class ListField implements FieldType
 {
     /**
-     * @var int|float
+     * @var string
      */
     protected $value;
 
     /**
-     * Create a new instance of Number field type.
+     * Create a new instance of List field type.
      *
      * @param int|float $value
      */
-    public function __construct($value = 0)
+    public function __construct($value = [])
     {
         $this->setValue($value);
     }
@@ -25,11 +25,11 @@ class Number implements FieldType
     /**
      * Return the value of this field.
      *
-     * @return int|float
+     * @return array
      */
     public function getValue()
     {
-        return $this->value;
+        return json_decode($this->value);
     }
 
     /**
@@ -39,11 +39,11 @@ class Number implements FieldType
      */
     public function setValue($value)
     {
-        if (!is_numeric($value)) {
-            throw new FieldTypeException(self::class.' value must be numeric.');
+        if (!is_array($value)) {
+            throw new FieldTypeException(self::class.' value must be an array.');
         }
 
-        $this->value = $value;
+        $this->value = json_encode($value);
     }
 
     /**
@@ -51,7 +51,7 @@ class Number implements FieldType
      */
     public function getLabel(): string
     {
-        return __('adminhub::fieldtypes.number.label');
+        return __('adminhub::fieldtypes.list.label');
     }
 
     /**
@@ -59,7 +59,7 @@ class Number implements FieldType
      */
     public function getSettingsView(): string
     {
-        return 'adminhub::field-types.number.settings';
+        return 'adminhub::field-types.list.settings';
     }
 
     /**
@@ -67,7 +67,7 @@ class Number implements FieldType
      */
     public function getView(): string
     {
-        return 'admihub::field-types.number.view';
+        return 'adminhub::field-types.list.view';
     }
 
     /**
@@ -76,10 +76,8 @@ class Number implements FieldType
     public function getConfig(): array
     {
         return [
-            'view'    => 'adminhub::field-types.number',
             'options' => [
-                'min' => 'numeric,min:1',
-                'max' => 'numeric,max:255',
+                'max_items' => 'numeric|nullable',
             ],
         ];
     }

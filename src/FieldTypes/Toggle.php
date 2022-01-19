@@ -6,7 +6,7 @@ use GetCandy\Base\FieldType;
 use GetCandy\Exceptions\FieldTypeException;
 use JsonSerializable;
 
-class Text implements FieldType, JsonSerializable
+class Toggle implements FieldType, JsonSerializable
 {
     /**
      * @var string
@@ -60,8 +60,8 @@ class Text implements FieldType, JsonSerializable
      */
     public function setValue($value)
     {
-        if ($value && !is_string($value)) {
-            throw new FieldTypeException(self::class.' value must be a string.');
+        if ($value && is_array($value)) {
+            throw new FieldTypeException(self::class.' value must be a string or boolean.');
         }
 
         $this->value = $value;
@@ -72,7 +72,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getLabel(): string
     {
-        return __('adminhub::fieldtypes.text.label');
+        return __('adminhub::fieldtypes.toggle.label');
     }
 
     /**
@@ -80,7 +80,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getSettingsView(): string
     {
-        return 'adminhub::field-types.text.settings';
+        return 'adminhub::field-types.toggle.settings';
     }
 
     /**
@@ -88,7 +88,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getView(): string
     {
-        return 'adminhub::field-types.text.view';
+        return 'adminhub::field-types.toggle.view';
     }
 
     /**
@@ -97,9 +97,9 @@ class Text implements FieldType, JsonSerializable
     public function getConfig(): array
     {
         return [
-            'view'    => 'adminhub::field-types.text',
             'options' => [
-                'richtext' => 'nullable',
+                'on_value'  => 'nullable|string',
+                'off_value' => 'nullable|string',
             ],
         ];
     }
