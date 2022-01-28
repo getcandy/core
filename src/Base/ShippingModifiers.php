@@ -35,6 +35,7 @@ class ShippingModifiers
      * Add a shipping modifier.
      *
      * @param $modifier Class reference to the modifier.
+     *
      * @return void
      */
     public function add($modifier)
