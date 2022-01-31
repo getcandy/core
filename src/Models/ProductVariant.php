@@ -86,8 +86,9 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
     /**
      * Get the price based on quantity and customer groups.
      *
-     * @param  int  $quantity
-     * @param  \Illuminate\Support\Collection  $customerGroups
+     * @param int                            $quantity
+     * @param \Illuminate\Support\Collection $customerGroups
+     *
      * @return int
      */
     public function getPrice(
@@ -95,13 +96,13 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
         Currency $currency,
         Collection $customerGroups = null
     ): int {
-        if (! $customerGroups) {
+        if (!$customerGroups) {
             $customerGroups = collect();
         }
 
         $prices = $this->prices->filter(function ($price) use ($quantity, $customerGroups) {
             return ($price->tier <= $quantity) && (
-                ! $price->customer_group_id || $customerGroups->pluck('id')->contains($price->customer_group_id)
+                !$price->customer_group_id || $customerGroups->pluck('id')->contains($price->customer_group_id)
             );
         })->sortBy('price');
 
@@ -109,7 +110,7 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
             return $price->currency_id == $currency->id;
         });
 
-        if (! $currencyPrice) {
+        if (!$currencyPrice) {
             throw new MissingCurrencyPriceException(
                 __('getcandy::exceptions.missing_currency_price', [
                     'currency' => $currency->code,
