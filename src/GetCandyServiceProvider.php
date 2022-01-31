@@ -48,6 +48,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class GetCandyServiceProvider extends ServiceProvider
 {
@@ -94,7 +95,7 @@ class GetCandyServiceProvider extends ServiceProvider
         $this->registerAddonManifest();
         $this->registerBlueprintMacros();
 
-        if (!$this->app->environment('testing')) {
+        if (! $this->app->environment('testing')) {
             $this->registerStateListeners();
         }
 
@@ -114,6 +115,11 @@ class GetCandyServiceProvider extends ServiceProvider
         }
 
         Arr::macro('permutate', [\GetCandy\Utils\Arr::class, 'permutate']);
+
+        // Handle generator
+        Str::macro('handle', function ($string) {
+            return Str::slug($string, '_');
+        });
 
         Converter::setMeasurements(
             config('getcandy.shipping.measurements', [])
