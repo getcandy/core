@@ -119,9 +119,8 @@ class Product extends BaseModel implements SpatieHasMedia
     /**
      * Associate a product to another with a type.
      *
-     * @param mixed  $product
-     * @param string $type
-     *
+     * @param  mixed  $product
+     * @param  string  $type
      * @return void
      */
     public function associate($product, $type)
@@ -132,9 +131,8 @@ class Product extends BaseModel implements SpatieHasMedia
     /**
      * Dissociate a product to another with a type.
      *
-     * @param mixed  $product
-     * @param string $type
-     *
+     * @param  mixed  $product
+     * @param  string  $type
      * @return void
      */
     public function dissociate($product, $type = null)
