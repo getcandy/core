@@ -107,6 +107,19 @@ class Product extends BaseModel implements SpatieHasMedia
     }
 
     /**
+     * Return the product collections relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function collections()
+    {
+        return $this->belongsToMany(
+            Collection::class,
+            config('getcandy.database.table_prefix').'collection_product'
+        )->withPivot(['position']);
+    }
+
+    /**
      * Return the associations relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -119,9 +132,8 @@ class Product extends BaseModel implements SpatieHasMedia
     /**
      * Associate a product to another with a type.
      *
-     * @param mixed  $product
-     * @param string $type
-     *
+     * @param  mixed  $product
+     * @param  string  $type
      * @return void
      */
     public function associate($product, $type)
@@ -132,9 +144,8 @@ class Product extends BaseModel implements SpatieHasMedia
     /**
      * Dissociate a product to another with a type.
      *
-     * @param mixed  $product
-     * @param string $type
-     *
+     * @param  mixed  $product
+     * @param  string  $type
      * @return void
      */
     public function dissociate($product, $type = null)
