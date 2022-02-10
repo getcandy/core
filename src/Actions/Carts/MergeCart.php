@@ -3,7 +3,6 @@
 namespace GetCandy\Actions\Carts;
 
 use GetCandy\Models\Cart;
-use GetCandy\Models\CartLine;
 use Illuminate\Support\Facades\DB;
 
 class MergeCart
@@ -11,8 +10,9 @@ class MergeCart
     /**
      * Execute the action.
      *
-     * @param  \GetCandy\Models\Cart  $target
-     * @param  \GetCandy\Models\Cart  $source
+     * @param \GetCandy\Models\Cart $target
+     * @param \GetCandy\Models\Cart $source
+     *
      * @return \GetCandy\Models\Cart
      */
     public function execute(Cart $target, Cart $source)
