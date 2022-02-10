@@ -20,10 +20,9 @@ class CalculateLine
     /**
      * Execute the action.
      *
-     * @param CartLine                                 $cartLine
-     * @param \Illuminate\Database\Eloquent\Collection $customerGroups
-     *
-     * @return void
+     * @param  \GetCandy\Models\CartLine  $cartLine
+     * @param  \Illuminate\Database\Eloquent\Collection  $customerGroups
+     * @return \GetCandy\Models\CartLine
      */
     public function execute(
         CartLine $cartLine,
