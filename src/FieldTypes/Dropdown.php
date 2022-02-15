@@ -15,7 +15,7 @@ class Dropdown implements FieldType
     /**
      * Create a new instance of List field type.
      *
-     * @param string|int $value
+     * @param  string|int  $value
      */
     public function __construct($value = '')
     {
@@ -35,11 +35,11 @@ class Dropdown implements FieldType
     /**
      * Set the value of this field.
      *
-     * @param string|int $value
+     * @param  string|int  $value
      */
     public function setValue($value)
     {
-        if ($value && !is_string($value)) {
+        if ($value && ! is_string($value)) {
             throw new FieldTypeException(self::class.' value must be a string.');
         }
 
