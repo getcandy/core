@@ -12,7 +12,8 @@ interface PricingManagerInterface
     /**
      * Set the user property.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     *
      * @return self
      */
     public function user(Authenticatable $user);
@@ -20,7 +21,8 @@ interface PricingManagerInterface
     /**
      * Set the currency property.
      *
-     * @param  \GetCandy\Models\Currency  $currency
+     * @param \GetCandy\Models\Currency $currency
+     *
      * @return self
      */
     public function currency(Currency $currency);
@@ -28,7 +30,8 @@ interface PricingManagerInterface
     /**
      * Set the quantity property.
      *
-     * @param  int  $qty
+     * @param int $qty
+     *
      * @return self
      */
     public function qty(int $qty);
@@ -36,7 +39,8 @@ interface PricingManagerInterface
     /**
      * Set the customer groups.
      *
-     * @param  Collection  $customerGroups
+     * @param Collection $customerGroups
+     *
      * @return self
      */
     public function customerGroups(Collection $customerGroups);
@@ -44,7 +48,8 @@ interface PricingManagerInterface
     /**
      * Set the customer group.
      *
-     * @param  CustomerGroup  $customerGroup
+     * @param CustomerGroup $customerGroup
+     *
      * @return self
      */
     public function customerGroup(CustomerGroup $customerGroup);
@@ -52,7 +57,8 @@ interface PricingManagerInterface
     /**
      * Get the price for a purchasable.
      *
-     * @param  Purchasable  $purchasable
+     * @param Purchasable $purchasable
+     *
      * @return \GetCandy\Base\DataTransferObjects\PricingResponse
      */
     public function for(Purchasable $purchasable);
