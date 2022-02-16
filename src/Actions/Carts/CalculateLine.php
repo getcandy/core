@@ -5,24 +5,17 @@ namespace GetCandy\Actions\Carts;
 use GetCandy\Base\Addressable;
 use GetCandy\DataTypes\Price;
 use GetCandy\Facades\Pricing;
-use GetCandy\Managers\TaxManager;
+use GetCandy\Facades\Taxes;
 use GetCandy\Models\CartLine;
 use Illuminate\Support\Collection;
 
 class CalculateLine
 {
-    public function __construct(
-        protected TaxManager $taxManager
-    ) {
-        //
-    }
-
     /**
      * Execute the action.
      *
-     * @param \GetCandy\Models\CartLine                $cartLine
-     * @param \Illuminate\Database\Eloquent\Collection $customerGroups
-     *
+     * @param  \GetCandy\Models\CartLine  $cartLine
+     * @param  \Illuminate\Database\Eloquent\Collection  $customerGroups
      * @return \GetCandy\Models\CartLine
      */
     public function execute(
@@ -54,7 +47,7 @@ class CalculateLine
 
         $subTotal = $unitPrice * $cartLine->quantity;
 
-        $taxBreakDown = $this->taxManager->setShippingAddress($shippingAddress)
+        $taxBreakDown = Taxes::setShippingAddress($shippingAddress)
             ->setBillingAddress($billingAddress)
             ->setCurrency($cart->currency)
             ->setPurchasable($purchasable)
