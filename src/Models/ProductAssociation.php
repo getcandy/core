@@ -72,7 +72,8 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the cross sell scope.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return void
      */
     public function scopeCrossSell(Builder $query)
@@ -83,7 +84,8 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the up sell scope.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return void
      */
     public function scopeUpSell(Builder $query)
@@ -94,7 +96,8 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the up alternate scope.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return void
      */
     public function scopeAlternate(Builder $query)
@@ -105,8 +108,9 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the type scope.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $type
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string                                $type
+     *
      * @return void
      */
     public function scopeType(Builder $query, $type)
