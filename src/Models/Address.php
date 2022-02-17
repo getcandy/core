@@ -30,10 +30,19 @@ class Address extends BaseModel implements Addressable
     protected $guarded = [];
 
     /**
+     * Define attribute casting.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'shipping_default' => 'boolean',
+        'billing_default' => 'boolean',
+    ];
+
+    /**
      * Mutator for the meta attribute.
      *
-     * @param array|null $value
-     *
+     * @param  array|null  $value
      * @return void
      */
     public function setMetaAttribute(array $value = null)
@@ -46,8 +55,7 @@ class Address extends BaseModel implements Addressable
     /**
      * Accessor for the meta attribute.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return array
      */
     public function getMetaAttribute($value)
