@@ -30,7 +30,7 @@ class UpdateProductPositions implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param Collection $collection
+     * @param  Collection  $collection
      */
     public function __construct(Collection $collection)
     {
@@ -45,7 +45,6 @@ class UpdateProductPositions implements ShouldQueue
 
         DB::transaction(function () {
             $products = app(SortProducts::class)->execute($this->collection);
-
             $productSync = $products->values()->mapWithKeys(function ($product, $index) {
                 return [
                     $product->id => [
@@ -53,7 +52,6 @@ class UpdateProductPositions implements ShouldQueue
                     ],
                 ];
             });
-
             $this->collection->products()->sync($productSync);
         });
     }
