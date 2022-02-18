@@ -20,6 +20,6 @@ class ProductOptionTest extends TestCase
     {
         $expected = config('scout.prefix').'product_options_en';
 
-        $this->assertEquals($expected, (new ProductOption)->searchableAs());
+        $this->assertEquals($expected, (new ProductOption())->searchableAs());
     }
 }

@@ -39,8 +39,9 @@ class SyncTags implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  \Illuminate\Support\Collection  $tags
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param \Illuminate\Support\Collection      $tags
+     *
      * @return void
      */
     public function __construct(Model $model, Collection $tags)
