@@ -14,9 +14,8 @@ class CalculateLine
     /**
      * Execute the action.
      *
-     * @param \GetCandy\Models\CartLine                $cartLine
-     * @param \Illuminate\Database\Eloquent\Collection $customerGroups
-     *
+     * @param  \GetCandy\Models\CartLine  $cartLine
+     * @param  \Illuminate\Database\Eloquent\Collection  $customerGroups
      * @return \GetCandy\Models\CartLine
      */
     public function execute(
@@ -29,17 +28,20 @@ class CalculateLine
         $cart = $cartLine->cart;
         $unitQuantity = $purchasable->getUnitQuantity();
 
-        $priceResponse = Pricing::currency($cart->currency)
-            ->qty($cartLine->quantity)
-            ->currency($cart->currency)
-            ->customerGroups($customerGroups)
-            ->for($purchasable);
+        // we check if any cart line modifiers have already specified a unit price in their calculating() method
+        if (! ($price = $cartLine->unitPrice) instanceof Price) {
+            $priceResponse = Pricing::currency($cart->currency)
+                ->qty($cartLine->quantity)
+                ->currency($cart->currency)
+                ->customerGroups($customerGroups)
+                ->for($purchasable);
 
-        $price = new Price(
-            $priceResponse->matched->price->value,
-            $cart->currency,
-            $purchasable->getUnitQuantity()
-        );
+            $price = new Price(
+                $priceResponse->matched->price->value,
+                $cart->currency,
+                $purchasable->getUnitQuantity()
+            );
+        }
 
         $unitPrice = (int) (round(
             $price->decimal / $purchasable->getUnitQuantity(),
@@ -52,9 +54,10 @@ class CalculateLine
             ->setBillingAddress($billingAddress)
             ->setCurrency($cart->currency)
             ->setPurchasable($purchasable)
+            ->setCartLine($cartLine)
             ->getBreakdown($subTotal);
 
-        $taxTotal = $taxBreakDown->sum('total.value');
+        $taxTotal = $taxBreakDown->amounts->sum('price.value');
 
         $cartLine->taxBreakdown = $taxBreakDown;
         $cartLine->subTotal = new Price($subTotal, $cart->currency, $unitQuantity);
