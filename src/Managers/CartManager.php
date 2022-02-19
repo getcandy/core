@@ -48,7 +48,7 @@ class CartManager
     /**
      * Initialize the cart manager.
      *
-     * @param Cart $cart
+     * @param  Cart  $cart
      */
     public function __construct(
         protected Cart $cart,
@@ -117,10 +117,10 @@ class CartManager
         $this->cart->taxBreakdown = $taxBreakDownAmounts->groupBy('identifier')->map(function ($amounts) {
             return [
                 'percentage'    => $amounts->first()->percentage,
-                'description'   => $amounts->first()->description,
-                'identifier'    => $amounts->first()->identifier,
-                'amounts'       => $amounts,
-                'total'         => new Price($amounts->sum('price.value'), $this->cart->currency, 1),
+                'description' => $amounts->first()->description,
+                'identifier' => $amounts->first()->identifier,
+                'amounts' => $amounts,
+                'total'   => new Price($amounts->sum('price.value'), $this->cart->currency, 1),
             ];
         });
 
@@ -146,10 +146,9 @@ class CartManager
     /**
      * Add a line to the cart.
      *
-     * @param Purchasable $purchasable
-     * @param int         $quantity
-     * @param array       $meta
-     *
+     * @param  Purchasable  $purchasable
+     * @param  int  $quantity
+     * @param  array  $meta
      * @return bool
      */
     public function add(Purchasable $purchasable, int $quantity = 1, $meta = [])
@@ -194,11 +193,10 @@ class CartManager
     /**
      * Remove a cart line from the cart.
      *
-     * @param int|string $cartLineId
+     * @param  int|string  $cartLineId
+     * @return \GetCandy\Models\Cart
      *
      * @throws \GetCandy\Exceptions\CartLineIdMismatchException
-     *
-     * @return \GetCandy\Models\Cart
      */
     public function removeLine($cartLineId)
     {
@@ -206,7 +204,7 @@ class CartManager
         // belong to this cart, throw an exception.
         $line = $this->cart->lines()->whereId($cartLineId)->first();
 
-        if (!$line) {
+        if (! $line) {
             throw new CartLineIdMismatchException(
                 __('getcandy::exceptions.cart_line_id_mismatch')
             );
@@ -220,8 +218,7 @@ class CartManager
     /**
      * Update cart lines.
      *
-     * @param Collection $lines
-     *
+     * @param  Collection  $lines
      * @return \GetCandy\Models\Cart
      */
     public function updateLines(Collection $lines)
@@ -242,10 +239,9 @@ class CartManager
     /**
      * Update a cart line.
      *
-     * @param string|int $id
-     * @param int        $quantity
-     * @param array|null $meta
-     *
+     * @param  string|int  $id
+     * @param  int  $quantity
+     * @param  array|null  $meta
      * @return void
      */
     public function updateLine($id, int $quantity, $meta = null)
@@ -271,9 +267,8 @@ class CartManager
     /**
      * Associate a user to the cart.
      *
-     * @param User   $user
-     * @param string $policy
-     *
+     * @param  User  $user
+     * @param  string  $policy
      * @return \GetCandy\Models\Cart
      */
     public function associate(User $user, $policy = 'merge')
@@ -304,8 +299,7 @@ class CartManager
     /**
      * Set the shipping address.
      *
-     * @param \GetCandy\Base\Addressable|array $address
-     *
+     * @param  \GetCandy\Base\Addressable|array  $address
      * @return \GetCandy\Models\Cart
      */
     public function setShippingAddress(array|Addressable $address)
@@ -320,8 +314,7 @@ class CartManager
     /**
      * Set the billing address.
      *
-     * @param array|Addressable $address
-     *
+     * @param  array|Addressable  $address
      * @return self
      */
     public function setBillingAddress(array|Addressable $address)
@@ -336,15 +329,14 @@ class CartManager
     /**
      * Set the shipping option to the shipping address.
      *
-     * @param ShippingOption $option
+     * @param  ShippingOption  $option
+     * @return self
      *
      * @throws \GetCandy\Exceptions\Carts\ShippingAddressMissingException
-     *
-     * @return self
      */
     public function setShippingOption(ShippingOption $option)
     {
-        if (!$this->cart->shippingAddress) {
+        if (! $this->cart->shippingAddress) {
             throw new ShippingAddressMissingException();
         }
         $this->cart->shippingAddress->shippingOption = $option;
@@ -360,7 +352,7 @@ class CartManager
 
     public function getShippingOption()
     {
-        if (!$this->cart->shippingAddress) {
+        if (! $this->cart->shippingAddress) {
             return null;
         }
 
@@ -407,9 +399,8 @@ class CartManager
     /**
      * Add an address to the.
      *
-     * @param array|Addressable $address
+     * @param  array|Addressable  $address
      * @param [type] $type
-     *
      * @return void
      */
     private function addAddress(array|Addressable $address, $type)
