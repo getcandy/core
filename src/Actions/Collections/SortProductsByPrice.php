@@ -11,10 +11,9 @@ class SortProductsByPrice
     /**
      * Execute the action.
      *
-     * @param \Illuminate\Support\Collection $products
-     * @param \GetCandy\Models\Currency      $currency
-     * @param string                         $direction
-     *
+     * @param  \Illuminate\Support\Collection  $products
+     * @param  \GetCandy\Models\Currency  $currency
+     * @param  string  $direction
      * @return void
      */
     public function execute(Collection $products, Currency $currency, $direction = 'asc')
