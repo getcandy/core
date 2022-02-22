@@ -60,7 +60,8 @@ class Url extends BaseModel
     /**
      * Return the query scope for default.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param \Illuminate\Database\Query\Builder $query
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function scopeDefault($query)
