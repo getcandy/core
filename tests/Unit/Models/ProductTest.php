@@ -48,7 +48,7 @@ class ProductTest extends TestCase
     {
         $expected = config('scout.prefix').'products_en';
 
-        $this->assertEquals($expected, (new Product())->searchableAs());
+        $this->assertEquals($expected, (new Product)->searchableAs());
     }
 
     /** @test */
