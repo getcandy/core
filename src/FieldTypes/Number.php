@@ -67,7 +67,7 @@ class Number implements FieldType
      */
     public function getView(): string
     {
-        return 'adminhub::field-types.number.view';
+        return 'admihub::field-types.number.view';
     }
 
     /**
