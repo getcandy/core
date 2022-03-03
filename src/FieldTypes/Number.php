@@ -15,7 +15,7 @@ class Number implements FieldType
     /**
      * Create a new instance of Number field type.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function __construct($value = 0)
     {
@@ -35,11 +35,11 @@ class Number implements FieldType
     /**
      * Set the value of this field.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function setValue($value)
     {
-        if (!is_numeric($value)) {
+        if (! is_numeric($value)) {
             throw new FieldTypeException(self::class.' value must be numeric.');
         }
 
@@ -67,7 +67,7 @@ class Number implements FieldType
      */
     public function getView(): string
     {
-        return 'admihub::field-types.number.view';
+        return 'adminhub::field-types.number.view';
     }
 
     /**
@@ -78,8 +78,8 @@ class Number implements FieldType
         return [
             'view'    => 'adminhub::field-types.number',
             'options' => [
-                'min' => 'numeric,min:1',
-                'max' => 'numeric,max:255',
+                'min' => 'numeric|min:1',
+                'max' => 'numeric|max:255',
             ],
         ];
     }
