@@ -4,8 +4,9 @@ namespace GetCandy\FieldTypes;
 
 use GetCandy\Base\FieldType;
 use GetCandy\Exceptions\FieldTypeException;
+use JsonSerializable;
 
-class ListField implements FieldType
+class ListField implements FieldType, JsonSerializable
 {
     /**
      * @var string
@@ -15,11 +16,21 @@ class ListField implements FieldType
     /**
      * Create a new instance of List field type.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function __construct($value = [])
     {
         $this->setValue($value);
+    }
+
+    /**
+     * Serialize the class.
+     *
+     * @return string
+     */
+    public function jsonSerialize()
+    {
+        return $this->value;
     }
 
     /**
@@ -35,11 +46,11 @@ class ListField implements FieldType
     /**
      * Set the value of this field.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function setValue($value)
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             throw new FieldTypeException(self::class.' value must be an array.');
         }
 

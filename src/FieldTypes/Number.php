@@ -4,8 +4,9 @@ namespace GetCandy\FieldTypes;
 
 use GetCandy\Base\FieldType;
 use GetCandy\Exceptions\FieldTypeException;
+use JsonSerializable;
 
-class Number implements FieldType
+class Number implements FieldType, JsonSerializable
 {
     /**
      * @var int|float
@@ -15,11 +16,21 @@ class Number implements FieldType
     /**
      * Create a new instance of Number field type.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function __construct($value = 0)
     {
         $this->setValue($value);
+    }
+
+    /**
+     * Serialize the class.
+     *
+     * @return string
+     */
+    public function jsonSerialize()
+    {
+        return $this->value;
     }
 
     /**
@@ -35,11 +46,11 @@ class Number implements FieldType
     /**
      * Set the value of this field.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function setValue($value)
     {
-        if (!is_numeric($value)) {
+        if (! is_numeric($value)) {
             throw new FieldTypeException(self::class.' value must be numeric.');
         }
 
