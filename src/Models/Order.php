@@ -66,6 +66,16 @@ class Order extends BaseModel
     }
 
     /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return config('scout.prefix').'orders';
+    }
+
+    /**
      * Getter for status label.
      *
      * @return string
@@ -225,12 +235,12 @@ class Order extends BaseModel
     protected function getSearchableAttributes()
     {
         return [
-            'id'         => $this->id,
-            'reference'  => $this->reference,
-            'status'     => $this->status,
-            'placed_at'  => $this->placed_at,
+            'id'        => $this->id,
+            'reference' => $this->reference,
+            'status'    => $this->status,
+            'placed_at' => $this->placed_at,
             'created_at' => $this->created_at,
-            'charges'    => $this->transactions->map(function ($transaction) {
+            'charges'   => $this->transactions->map(function ($transaction) {
                 return [
                     'reference' => $transaction->reference,
                 ];
