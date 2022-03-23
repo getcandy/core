@@ -56,7 +56,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Laravel\Scout\Scout;
 
 class GetCandyServiceProvider extends ServiceProvider
 {
@@ -149,7 +148,7 @@ class GetCandyServiceProvider extends ServiceProvider
         $this->registerObservers();
         $this->registerBlueprintMacros();
 
-        if (! $this->app->environment('testing')) {
+        if (!$this->app->environment('testing')) {
             $this->registerStateListeners();
         }
 

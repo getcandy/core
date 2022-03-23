@@ -9,7 +9,8 @@ interface FieldTypeManifestInterface
     /**
      * Add an attribute type.
      *
-     * @param  string  $classname
+     * @param string $classname
+     *
      * @return void
      */
     public function add($classname);
