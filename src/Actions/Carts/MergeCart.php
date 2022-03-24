@@ -10,8 +10,9 @@ class MergeCart
     /**
      * Execute the action.
      *
-     * @param  \GetCandy\Models\Cart  $target
-     * @param  \GetCandy\Models\Cart  $source
+     * @param \GetCandy\Models\Cart $target
+     * @param \GetCandy\Models\Cart $source
+     *
      * @return \GetCandy\Models\Cart
      */
     public function execute(Cart $target, Cart $source)
