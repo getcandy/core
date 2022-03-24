@@ -20,14 +20,14 @@ class AddressObserverTest extends TestCase
         $customer = Customer::factory()->create();
 
         $addressA = Address::factory()->create([
-            'customer_id' => $customer->id,
+            'customer_id'      => $customer->id,
             'shipping_default' => true,
         ]);
 
         $this->assertTrue($addressA->shipping_default);
 
         $addressB = Address::factory()->create([
-            'customer_id' => $customer->id,
+            'customer_id'      => $customer->id,
             'shipping_default' => true,
         ]);
 
@@ -48,14 +48,14 @@ class AddressObserverTest extends TestCase
         $customer = Customer::factory()->create();
 
         $addressA = Address::factory()->create([
-            'customer_id' => $customer->id,
+            'customer_id'     => $customer->id,
             'billing_default' => true,
         ]);
 
         $this->assertTrue($addressA->billing_default);
 
         $addressB = Address::factory()->create([
-            'customer_id' => $customer->id,
+            'customer_id'     => $customer->id,
             'billing_default' => true,
         ]);
 
