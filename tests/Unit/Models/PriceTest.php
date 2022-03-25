@@ -65,7 +65,7 @@ class PriceTest extends TestCase
 
         $currencyGBP = Currency::factory()->create([
             'decimal_places' => 2,
-            'code' => 'GBP',
+            'code'           => 'GBP',
         ]);
 
         $price = Price::factory()->create([
@@ -82,7 +82,7 @@ class PriceTest extends TestCase
 
         $currencyUSD = Currency::factory()->create([
             'decimal_places' => 3,
-            'code' => 'USD',
+            'code'           => 'USD',
         ]);
 
         $price = Price::factory()->create([
