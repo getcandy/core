@@ -2,24 +2,26 @@
 
 namespace GetCandy\DataTypes;
 
+use App;
 use GetCandy\Exceptions\InvalidDataTypeValueException;
 use GetCandy\Models\Currency;
+use NumberFormatter;
 
 class Price
 {
     /**
      * Initialise the Price datatype.
      *
-     * @param mixed    $value
-     * @param Currency $currency
-     * @param int      $unitQty
+     * @param  mixed  $value
+     * @param  Currency  $currency
+     * @param  int  $unitQty
      */
     public function __construct(
         public $value,
         public Currency $currency,
         public int $unitQty = 1
     ) {
-        if (!is_int($value)) {
+        if (! is_int($value)) {
             throw new InvalidDataTypeValueException(
                 'Value was "'.(gettype($value)).'" expected "int"'
             );
@@ -32,8 +34,7 @@ class Price
     /**
      * Getter for methods/properties.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return void
      */
     public function __get($name)
@@ -71,15 +72,17 @@ class Price
      *
      * @return string
      */
-    public function formatted()
+    public function formatted($locale = null, $formatter = NumberFormatter::CURRENCY)
     {
-        $format = number_format(
-            $this->decimal(),
-            $this->currency->decimal_places,
-            $this->currency->decimal_point,
-            $this->currency->thousand_point
-        );
+        if (! $locale) {
+            $locale = App::currentLocale();
+        }
 
-        return str_replace('{value}', $format, $this->currency->format);
+        $formatter = new NumberFormatter($locale, $formatter);
+
+        $formatter->setTextAttribute(NumberFormatter::CURRENCY_CODE, $this->currency->code);
+        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, $this->currency->decimal_places);
+
+        return $formatter->format($this->decimal());
     }
 }
