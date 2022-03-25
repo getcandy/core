@@ -302,20 +302,20 @@ class CartManagerTest extends TestCase
 
         $cart->getManager()->add($purchasable, 1, null);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 1,
-            'meta'           => null,
+            'quantity' => 1,
+            'meta' => null,
         ]);
 
         $this->assertCount(1, $cart->refresh()->lines);
 
         $cart->getManager()->add($purchasable, 1, null);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 2,
-            'meta'           => null,
+            'quantity' => 2,
+            'meta' => null,
         ]);
     }
 
@@ -330,59 +330,59 @@ class CartManagerTest extends TestCase
 
         $cart->getManager()->add($purchasable, 1, []);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 1,
-            'meta'           => '[]',
+            'quantity' => 1,
+            'meta' => '[]',
         ]);
 
-        $this->assertDatabaseCount((new CartLine())->getTable(), 1);
+        $this->assertDatabaseCount((new CartLine)->getTable(), 1);
 
         $cart->getManager()->add($purchasable, 1);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 2,
-            'meta'           => '[]',
+            'quantity' => 2,
+            'meta' => '[]',
         ]);
 
         $cart->getManager()->add($purchasable, 1, []);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 3,
-            'meta'           => '[]',
+            'quantity' => 3,
+            'meta' => '[]',
         ]);
 
-        $this->assertDatabaseCount((new CartLine())->getTable(), 1);
+        $this->assertDatabaseCount((new CartLine)->getTable(), 1);
 
-        $this->assertDatabaseCount((new CartLine())->getTable(), 1);
+        $this->assertDatabaseCount((new CartLine)->getTable(), 1);
 
         $cart->getManager()->add($purchasable, 1, null);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 4,
-            'meta'           => '[]',
+            'quantity' => 4,
+            'meta' => '[]',
         ]);
 
-        $this->assertDatabaseCount((new CartLine())->getTable(), 1);
+        $this->assertDatabaseCount((new CartLine)->getTable(), 1);
 
         $cart->getManager()->add($purchasable, 1, ['foo' => 'bar']);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 4,
-            'meta'           => '[]',
+            'quantity' => 4,
+            'meta' => '[]',
         ]);
 
-        $this->assertDatabaseHas((new CartLine())->getTable(), [
+        $this->assertDatabaseHas((new CartLine)->getTable(), [
             'purchasable_id' => $purchasable->id,
-            'quantity'       => 1,
-            'meta'           => '{"foo":"bar"}',
+            'quantity' => 1,
+            'meta' => '{"foo":"bar"}',
         ]);
 
-        $this->assertDatabaseCount((new CartLine())->getTable(), 2);
+        $this->assertDatabaseCount((new CartLine)->getTable(), 2);
     }
 
     /** @test */
@@ -536,6 +536,46 @@ class CartManagerTest extends TestCase
         $cart->getManager()->removeLine($cart->refresh()->lines->first()->id);
 
         $this->assertCount(1, $cart->refresh()->lines);
+    }
+
+    /** @test */
+    public function can_clear_a_cart()
+    {
+        $currency = Currency::factory()->create();
+
+        $cart = Cart::factory()->create([
+            'currency_id' => $currency->id,
+        ]);
+
+        $purchasableA = ProductVariant::factory()->create();
+        $purchasableB = ProductVariant::factory()->create();
+
+        PriceModel::factory()->create([
+            'price'          => 100,
+            'tier'           => 1,
+            'currency_id'    => $currency->id,
+            'priceable_type' => get_class($purchasableA),
+            'priceable_id'   => $purchasableA->id,
+        ]);
+
+        PriceModel::factory()->create([
+            'price'          => 100,
+            'tier'           => 1,
+            'currency_id'    => $currency->id,
+            'priceable_type' => get_class($purchasableB),
+            'priceable_id'   => $purchasableB->id,
+        ]);
+
+        $cart->lines()->createMany([
+            ['quantity' => 1, 'purchasable_type' => ProductVariant::class, 'purchasable_id' => $purchasableA->id],
+            ['quantity' => 2, 'purchasable_type' => ProductVariant::class, 'purchasable_id' => $purchasableB->id],
+        ]);
+
+        $this->assertCount(2, $cart->refresh()->lines);
+
+        $cart->getManager()->clear();
+
+        $this->assertCount(0, $cart->refresh()->lines);
     }
 
     /** @test */
@@ -767,17 +807,17 @@ class CartManagerTest extends TestCase
 
         $cart = Cart::factory()->create([
             'currency_id' => $currency->id,
-            'channel_id'  => $channel->id,
+            'channel_id' => $channel->id,
         ]);
 
         $shipping = CartAddress::factory()->create([
             'cart_id' => $cart->id,
-            'type'    => 'shipping',
+            'type' => 'shipping',
         ]);
 
         $billing = CartAddress::factory()->create([
             'cart_id' => $cart->id,
-            'type'    => 'billing',
+            'type' => 'billing',
         ]);
 
         $cart->getManager()->setShippingAddress($shipping);
@@ -804,7 +844,7 @@ class CartManagerTest extends TestCase
 
         $cart = Cart::factory()->create([
             'currency_id' => $currency->id,
-            'channel_id'  => $channel->id,
+            'channel_id' => $channel->id,
         ]);
 
         $this->expectException(BillingAddressMissingException::class);
@@ -812,9 +852,9 @@ class CartManagerTest extends TestCase
         $cart->getManager()->createOrder();
 
         Cart::create([
-            'cart_id'  => $cart->id,
+            'cart_id' => $cart->id,
             'postcode' => 'foobar',
-            'type'     => 'billing',
+            'type' => 'billing',
         ]);
 
         $this->expectException(BillingAddressIncompleteException::class);
@@ -839,18 +879,18 @@ class CartManagerTest extends TestCase
 
         $cart = Cart::factory()->create([
             'currency_id' => $currency->id,
-            'channel_id'  => $channel->id,
-            'order_id'    => $order->id,
+            'channel_id' => $channel->id,
+            'order_id' => $order->id,
         ]);
 
         CartAddress::factory()->create([
             'cart_id' => $cart->id,
-            'type'    => 'shipping',
+            'type' => 'shipping',
         ]);
 
         CartAddress::factory()->create([
             'cart_id' => $cart->id,
-            'type'    => 'billing',
+            'type' => 'billing',
         ]);
 
         $this->expectException(OrderExistsException::class);
