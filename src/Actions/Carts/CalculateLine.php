@@ -14,9 +14,8 @@ class CalculateLine
     /**
      * Execute the action.
      *
-     * @param \GetCandy\Models\CartLine                $cartLine
-     * @param \Illuminate\Database\Eloquent\Collection $customerGroups
-     *
+     * @param  \GetCandy\Models\CartLine  $cartLine
+     * @param  \Illuminate\Database\Eloquent\Collection  $customerGroups
      * @return \GetCandy\Models\CartLine
      */
     public function execute(
@@ -30,12 +29,13 @@ class CalculateLine
         $unitQuantity = $purchasable->getUnitQuantity();
 
         // we check if any cart line modifiers have already specified a unit price in their calculating() method
-        if (!($price = $cartLine->unitPrice) instanceof Price) {
+        if (! ($price = $cartLine->unitPrice) instanceof Price) {
             $priceResponse = Pricing::currency($cart->currency)
                 ->qty($cartLine->quantity)
                 ->currency($cart->currency)
                 ->customerGroups($customerGroups)
-                ->for($purchasable);
+                ->for($purchasable)
+                ->get();
 
             $price = new Price(
                 $priceResponse->matched->price->value,
