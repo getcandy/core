@@ -14,7 +14,8 @@ interface PaymentTypeInterface
     /**
      * Set the cart.
      *
-     * @param  \GetCandy\Models\Cart  $order
+     * @param \GetCandy\Models\Cart $order
+     *
      * @return self
      */
     public function cart(Cart $cart): self;
@@ -22,7 +23,8 @@ interface PaymentTypeInterface
     /**
      * Set the order.
      *
-     * @param  Order  $order
+     * @param Order $order
+     *
      * @return self
      */
     public function order(Order $order): self;
@@ -30,7 +32,8 @@ interface PaymentTypeInterface
     /**
      * Set any data the provider might need.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return self
      */
     public function withData(array $data): self;
@@ -38,7 +41,8 @@ interface PaymentTypeInterface
     /**
      * Set any configuration on the driver.
      *
-     * @param  array  $config
+     * @param array $config
+     *
      * @return self
      */
     public function setConfig(array $config): self;
@@ -53,9 +57,10 @@ interface PaymentTypeInterface
     /**
      * Refund a transaction for a given amount.
      *
-     * @param  \GetCandy\Models\Transaction  $transaction
-     * @param  int  $amount
-     * @param  null|string  $notes
+     * @param \GetCandy\Models\Transaction $transaction
+     * @param int                          $amount
+     * @param null|string                  $notes
+     *
      * @return \GetCandy\Base\DataTransferObjects\PaymentRefund
      */
     public function refund(Transaction $transaction, int $amount, $notes = null): PaymentRefund;
@@ -63,8 +68,9 @@ interface PaymentTypeInterface
     /**
      * Capture an amount for a transaction.
      *
-     * @param  \GetCandy\Models\Transaction  $transaction
-     * @param  int  $amount
+     * @param \GetCandy\Models\Transaction $transaction
+     * @param int                          $amount
+     *
      * @return \GetCandy\Base\DataTransferObjects\PaymentCapture
      */
     public function capture(Transaction $transaction, $amount = 0): PaymentCapture;
