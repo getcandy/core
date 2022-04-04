@@ -10,7 +10,8 @@ class CollectionObserver
     /**
      * Handle the Collection "updated" event.
      *
-     * @param  \GetCandy\Models\Collection  $collection
+     * @param \GetCandy\Models\Collection $collection
+     *
      * @return void
      */
     public function updated(Collection $collection)
