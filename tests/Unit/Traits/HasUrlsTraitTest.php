@@ -25,9 +25,9 @@ class HasUrlsTraitTest extends TestCase
 
         $this->assertCount(0, $product->refresh()->urls);
 
-        $this->assertDatabaseMissing((new Url())->getTable(), [
+        $this->assertDatabaseMissing((new Url)->getTable(), [
             'element_type' => Product::class,
-            'element_id'   => $product->id,
+            'element_id' => $product->id,
         ]);
     }
 
@@ -42,10 +42,10 @@ class HasUrlsTraitTest extends TestCase
 
         $this->assertCount(1, $product->refresh()->urls);
 
-        $this->assertDatabaseHas((new Url())->getTable(), [
+        $this->assertDatabaseHas((new Url)->getTable(), [
             'element_type' => Product::class,
-            'element_id'   => $product->id,
-            'slug'         => Str::slug($product->translateAttribute('name')),
+            'element_id' => $product->id,
+            'slug' => Str::slug($product->translateAttribute('name')),
         ]);
     }
 }
