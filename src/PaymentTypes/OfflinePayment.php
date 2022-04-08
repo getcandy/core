@@ -2,9 +2,9 @@
 
 namespace GetCandy\PaymentTypes;
 
+use GetCandy\Base\DataTransferObjects\PaymentAuthorize;
 use GetCandy\Base\DataTransferObjects\PaymentCapture;
 use GetCandy\Base\DataTransferObjects\PaymentRefund;
-use GetCandy\Base\DataTransferObjects\PaymentRelease;
 use GetCandy\Models\Transaction;
 
 class OfflinePayment extends AbstractPayment
@@ -12,20 +12,20 @@ class OfflinePayment extends AbstractPayment
     /**
      * {@inheritDoc}
      */
-    public function release(): PaymentRelease
+    public function authorize(): PaymentAuthorize
     {
-        if (!$this->order) {
-            if (!$this->order = $this->cart->order) {
+        if (! $this->order) {
+            if (! $this->order = $this->cart->order) {
                 $this->order = $this->cart->getManager()->createOrder();
             }
         }
 
         $this->order->update([
-            'status'    => $this->config['released'] ?? null,
+            'status' => $this->config['authorized'] ?? null,
             'placed_at' => now(),
         ]);
 
-        return new PaymentRelease(true);
+        return new PaymentAuthorize(true);
     }
 
     /**

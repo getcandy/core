@@ -5,8 +5,8 @@ return [
 
     'types' => [
         'cash-in-hand' => [
-            'driver'   => 'offline',
-            'released' => 'payment-offline',
+            'driver' => 'offline',
+            'authorized' => 'payment-offline',
         ],
     ],
 ];
