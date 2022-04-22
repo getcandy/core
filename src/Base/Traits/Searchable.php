@@ -2,6 +2,7 @@
 
 namespace GetCandy\Base\Traits;
 
+use Laravel\Scout\EngineManager;
 use Laravel\Scout\Searchable as ScoutSearchable;
 
 trait Searchable
@@ -59,14 +60,13 @@ trait Searchable
     /**
      * Add additional fields to filter on.
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return void
      */
     public function addFilterableAttributes(array $attributes)
     {
         collect($attributes)->filter(function ($att) {
-            return !in_array($att, $this->filterable) && !in_array($att, $this->additionalFilterableFields);
+            return ! in_array($att, $this->filterable) && ! in_array($att, $this->additionalFilterableFields);
         })->each(function ($att) {
             $this->additionalFilterableFields[] = $att;
         });
@@ -75,14 +75,13 @@ trait Searchable
     /**
      * Add additional sortable attributes.
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return void
      */
     public function addSortableAttributes(array $attributes)
     {
         collect($attributes)->filter(function ($att) {
-            return !in_array($att, $this->sortable) && !in_array($att, $this->additionalSortableFields);
+            return ! in_array($att, $this->sortable) && ! in_array($att, $this->additionalSortableFields);
         })->each(function ($att) {
             $this->additionalSortableFields[] = $att;
         });
@@ -117,14 +116,13 @@ trait Searchable
     /**
      * Add an attribute into the additional searchable fields.
      *
-     * @param string       $key
-     * @param string|mixed $value
-     *
+     * @param  string  $key
+     * @param  string|mixed  $value
      * @return void
      */
     public function addSearchableAttribute($key, $value)
     {
-        if (!isset($this->additionalSearchFields[$key])) {
+        if (! isset($this->additionalSearchFields[$key])) {
             $this->additionalSearchFields[$key] = $value;
         }
     }
@@ -144,5 +142,21 @@ trait Searchable
             $this->getSearchableAttributes(),
             $this->additionalSearchFields
         );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function searchableUsing()
+    {
+        $engines = config('getcandy.search.engine_map', []);
+
+        if (isset($engines[self::class])) {
+            return app(EngineManager::class)->engine(
+                $engines[self::class]
+            );
+        }
+
+        return app(EngineManager::class)->engine();
     }
 }
