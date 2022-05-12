@@ -16,7 +16,7 @@ class Number implements FieldType, JsonSerializable
     /**
      * Create a new instance of Number field type.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function __construct($value = 0)
     {
@@ -46,11 +46,11 @@ class Number implements FieldType, JsonSerializable
     /**
      * Set the value of this field.
      *
-     * @param int|float $value
+     * @param  int|float  $value
      */
     public function setValue($value)
     {
-        if ((!is_numeric($value)) && $value !== '') {
+        if ((! is_numeric($value)) && $value != '') {
             throw new FieldTypeException(self::class.' value must be numeric.');
         }
 
