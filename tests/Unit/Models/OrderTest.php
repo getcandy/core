@@ -98,7 +98,7 @@ class OrderTest extends TestCase
         OrderLine::factory()->create([
             'purchasable_type' => ProductVariant::class,
             'purchasable_id'   => ProductVariant::factory()->create()->id,
-            'order_id'         => $order->id,
+            'order_id' => $order->id,
         ]);
 
         $this->assertCount(1, $order->refresh()->lines);
@@ -161,12 +161,12 @@ class OrderTest extends TestCase
         $charge = Transaction::factory()->create([
             'order_id' => $order->id,
             'amount'   => 200,
-            'type'     => 'capture',
+            'type'   => 'capture',
         ]);
 
         $refund = Transaction::factory()->create([
             'order_id' => $order->id,
-            'type'     => 'refund',
+            'type' => 'refund',
         ]);
 
         $order = $order->refresh();
