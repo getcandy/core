@@ -10,7 +10,8 @@ class SortProducts
     /**
      * Execute the action.
      *
-     * @param  \GetCandy\Models\Collection  $collection
+     * @param \GetCandy\Models\Collection $collection
+     *
      * @return void
      */
     public function execute(Collection $collection)
