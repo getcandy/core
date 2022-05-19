@@ -51,14 +51,15 @@ class PricingManager implements PricingManagerInterface
 
     public function __construct()
     {
-        $this->user = Auth::user();
+        if (Auth::check() && is_getcandy_user(Auth::user())) {
+            $this->user = Auth::user();
+        }
     }
 
     /**
      * Set the purchasable property.
      *
-     * @param \GetCandy\Base\Purchasable $purchasable
-     *
+     * @param  \GetCandy\Base\Purchasable  $purchasable
      * @return self
      */
     public function for(Purchasable $purchasable)
@@ -71,8 +72,7 @@ class PricingManager implements PricingManagerInterface
     /**
      * Set the user property.
      *
-     * @param \Illuminate\Contracts\Auth\Authenticatable $user
-     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @return self
      */
     public function user(?Authenticatable $user)
@@ -97,8 +97,7 @@ class PricingManager implements PricingManagerInterface
     /**
      * Set the currency property.
      *
-     * @param \GetCandy\Models\Currency $currency
-     *
+     * @param  \GetCandy\Models\Currency  $currency
      * @return self
      */
     public function currency(?Currency $currency)
@@ -111,8 +110,7 @@ class PricingManager implements PricingManagerInterface
     /**
      * Set the quantity property.
      *
-     * @param int $qty
-     *
+     * @param  int  $qty
      * @return self
      */
     public function qty(int $qty)
@@ -125,8 +123,7 @@ class PricingManager implements PricingManagerInterface
     /**
      * Set the customer groups.
      *
-     * @param Collection $customerGroups
-     *
+     * @param  Collection  $customerGroups
      * @return self
      */
     public function customerGroups(?Collection $customerGroups)
@@ -139,8 +136,7 @@ class PricingManager implements PricingManagerInterface
     /**
      * Set the customer group.
      *
-     * @param CustomerGroup $customerGroup
-     *
+     * @param  CustomerGroup  $customerGroup
      * @return self
      */
     public function customerGroup(?CustomerGroup $customerGroup)
@@ -159,15 +155,15 @@ class PricingManager implements PricingManagerInterface
      */
     public function get()
     {
-        if (!$this->purchasable) {
+        if (! $this->purchasable) {
             throw new \ErrorException('No purchasable set.');
         }
 
-        if (!$this->currency) {
+        if (! $this->currency) {
             $this->currency = Currency::getDefault();
         }
 
-        if (!$this->customerGroups || !$this->customerGroups->count()) {
+        if (! $this->customerGroups || ! $this->customerGroups->count()) {
             $this->customerGroups = collect(
                 CustomerGroup::getDefault()
             );
@@ -187,19 +183,19 @@ class PricingManager implements PricingManagerInterface
             return $price->currency_id == $this->currency->id;
         });
 
-        if (!$currencyPrices->count()) {
+        if (! $currencyPrices->count()) {
             throw new MissingCurrencyPriceException();
         }
 
         $prices = $currencyPrices->filter(function ($price) {
             // Only fetch prices which have no customer group (available to all) or belong to the customer groups
             // that we are trying to check against.
-            return !$price->customer_group_id ||
+            return ! $price->customer_group_id ||
                 $this->customerGroups->pluck('id')->contains($price->customer_group_id);
         })->sortBy('price');
 
         // Get our base price
-        $basePrice = $prices->first(fn ($price) => $price->tier == 1 && !$price->customer_group_id);
+        $basePrice = $prices->first(fn ($price) => $price->tier == 1 && ! $price->customer_group_id);
 
         // To start, we'll set the matched price to the base price.
         $matched = $basePrice;
