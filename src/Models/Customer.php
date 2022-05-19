@@ -51,7 +51,7 @@ class Customer extends BaseModel
      */
     protected $casts = [
         'attribute_data' => AsAttributeData::class,
-        'meta' => 'object',
+        'meta'           => 'object',
     ];
 
     /**
@@ -151,7 +151,7 @@ class Customer extends BaseModel
     {
         return $this->hasMany(Order::class);
     }
-    
+
     /**
      * Get the mapped attributes relation.
      *
