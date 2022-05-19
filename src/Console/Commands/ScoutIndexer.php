@@ -37,8 +37,7 @@ class ScoutIndexer extends Command
     /**
      * Executes the re-index of the informed models.
      *
-     * @param array $models Models array for indexing
-     *
+     * @param  array  $models  Models array for indexing
      * @return void
      */
     private function indexer(array $models): void
@@ -54,7 +53,7 @@ class ScoutIndexer extends Command
             }
 
             // Checks whether to import the records
-            if (!$this->option('flush')) {
+            if (! $this->option('flush')) {
                 // Import model records to index
                 $this->call('scout:import', ['model' => $model]);
             }

@@ -86,8 +86,7 @@ class TestTaxDriver implements TaxDriver
     /**
      * Set the cart line.
      *
-     * @param CartLine $cartLine
-     *
+     * @param  CartLine  $cartLine
      * @return self
      */
     public function setCartLine(CartLine $cartLine): self
@@ -102,7 +101,7 @@ class TestTaxDriver implements TaxDriver
      */
     public function getBreakdown($subTotal): TaxBreakdown
     {
-        $breakdown = new TaxBreakdown();
+        $breakdown = new TaxBreakdown;
 
         $taxAmount = TaxRateAmount::factory()->create();
 
