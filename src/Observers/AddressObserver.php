@@ -9,7 +9,8 @@ class AddressObserver
     /**
      * Handle the Address "creating" event.
      *
-     * @param  \GetCandy\Models\Address  $address
+     * @param \GetCandy\Models\Address $address
+     *
      * @return void
      */
     public function creating(Address $address)
@@ -21,7 +22,8 @@ class AddressObserver
     /**
      * Handle the Address "updating" event.
      *
-     * @param  \GetCandy\Models\Address  $address
+     * @param \GetCandy\Models\Address $address
+     *
      * @return void
      */
     public function updating(Address $address)
@@ -33,7 +35,7 @@ class AddressObserver
     /**
      * Ensures that only one default shipping address exists.
      *
-     * @param  Address  $address  The address that will be saved.
+     * @param Address $address The address that will be saved.
      */
     protected function ensureOnlyOneDefaultShipping(Address $address): void
     {
@@ -54,7 +56,7 @@ class AddressObserver
     /**
      * Ensures that only one default billing address exists.
      *
-     * @param  Address  $address  The address that will be saved.
+     * @param Address $address The address that will be saved.
      */
     protected function ensureOnlyOneDefaultBilling(Address $address): void
     {
