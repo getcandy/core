@@ -185,8 +185,7 @@ class Cart extends BaseModel
     /**
      * Apply scope to get active cart.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return void
      */
     public function scopeActive(Builder $query)
