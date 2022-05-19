@@ -10,6 +10,7 @@ use GetCandy\FieldTypes\Number;
 use GetCandy\FieldTypes\Text;
 use GetCandy\FieldTypes\Toggle;
 use GetCandy\FieldTypes\TranslatedText;
+use GetCandy\FieldTypes\YouTube;
 
 class FieldTypeManifest
 {
@@ -29,23 +30,23 @@ class FieldTypeManifest
             Text::class,
             Toggle::class,
             TranslatedText::class,
+            YouTube::class,
         ]);
     }
 
     /**
      * Add a FieldType into GetCandy.
      *
-     * @param string $classname
-     *
+     * @param  string  $classname
      * @return void
      */
     public function add($classname)
     {
-        if (!class_exists($classname)) {
+        if (! class_exists($classname)) {
             throw new FieldTypeMissingException($classname);
         }
 
-        if (!(app()->make($classname) instanceof FieldType)) {
+        if (! (app()->make($classname) instanceof FieldType)) {
             throw new InvalidFieldTypeException($classname);
         }
 

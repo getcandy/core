@@ -6,7 +6,7 @@ use GetCandy\Base\FieldType;
 use GetCandy\Exceptions\FieldTypeException;
 use JsonSerializable;
 
-class Text implements FieldType, JsonSerializable
+class YouTube implements FieldType, JsonSerializable
 {
     /**
      * @var string
@@ -72,7 +72,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getLabel(): string
     {
-        return __('adminhub::fieldtypes.text.label');
+        return __('adminhub::fieldtypes.youtube.label');
     }
 
     /**
@@ -80,7 +80,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getSettingsView(): string
     {
-        return 'adminhub::field-types.text.settings';
+        return 'adminhub::field-types.youtube.settings';
     }
 
     /**
@@ -88,7 +88,7 @@ class Text implements FieldType, JsonSerializable
      */
     public function getView(): string
     {
-        return 'adminhub::field-types.text.view';
+        return 'adminhub::field-types.youtube.view';
     }
 
     /**
@@ -97,10 +97,7 @@ class Text implements FieldType, JsonSerializable
     public function getConfig(): array
     {
         return [
-            'view'    => 'adminhub::field-types.text',
-            'options' => [
-                'richtext' => 'nullable',
-            ],
+            'view'    => 'adminhub::field-types.youtube',
         ];
     }
 }

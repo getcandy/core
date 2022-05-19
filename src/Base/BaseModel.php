@@ -14,7 +14,7 @@ abstract class BaseModel extends Model
     /**
      * Create a new instance of the Model.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -30,9 +30,8 @@ abstract class BaseModel extends Model
     /**
      * Handle dynamic method calls into the model.
      *
-     * @param string $method
-     * @param array  $parameters
-     *
+     * @param  string  $method
+     * @param  array  $parameters
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -47,9 +46,8 @@ abstract class BaseModel extends Model
     /**
      * Handle dynamic static method calls into the model.
      *
-     * @param string $method
-     * @param array  $parameters
-     *
+     * @param  string  $method
+     * @param  array  $parameters
      * @return mixed
      */
     public static function __callStatic($method, $parameters)
