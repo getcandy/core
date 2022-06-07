@@ -33,15 +33,14 @@ class UrlGenerator
     /**
      * Handle the URL generation.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     *
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
     public function handle(Model $model)
     {
         $this->model = $model;
 
-        if (!$model->urls->count()) {
+        if (! $model->urls->count()) {
             if ($model->attribute_data) {
                 return $this->createFromAttribute('name');
             }
@@ -51,8 +50,7 @@ class UrlGenerator
     /**
      * Create default url from an attribute.
      *
-     * @param string $attribute
-     *
+     * @param  string  $attribute
      * @return void
      */
     protected function createFromAttribute($attribute)
@@ -62,9 +60,9 @@ class UrlGenerator
         );
 
         $this->model->urls()->create([
-            'default'     => true,
+            'default' => true,
             'language_id' => $this->defaultLanguage->id,
-            'slug'        => $slug,
+            'slug' => $slug,
         ]);
     }
 }
