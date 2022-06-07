@@ -23,8 +23,7 @@ class CreateOrder
     /**
      * Execute the action.
      *
-     * @param \GetCandy\Models\Cart $cart
-     *
+     * @param  \GetCandy\Models\Cart  $cart
      * @return void
      */
     public function execute(
@@ -42,7 +41,7 @@ class CreateOrder
                     $this->getModifiers()->toArray()
                 );
 
-            $pipeline->via('creating')->thenReturn();
+            $cart = $pipeline->via('creating')->thenReturn();
 
             $order = Order::create([
                 'user_id'            => $cart->user_id,
@@ -57,9 +56,9 @@ class CreateOrder
                 'tax_breakdown'      => $cart->taxBreakdown->map(function ($tax) {
                     return [
                         'description'       => $tax['description'],
-                        'identifier'        => $tax['identifier'],
-                        'percentage'        => $tax['amounts']->sum('percentage'),
-                        'total'             => $tax['total']->value,
+                        'identifier'   => $tax['identifier'],
+                        'percentage' => $tax['amounts']->sum('percentage'),
+                        'total'      => $tax['total']->value,
                     ];
                 })->values(),
                 'tax_total'             => $cart->taxTotal->value,
@@ -88,9 +87,9 @@ class CreateOrder
                     'tax_breakdown'    => $line->taxBreakdown->amounts->map(function ($amount) {
                         return [
                             'description' => $amount->description,
-                            'identifier'  => $amount->identifier,
-                            'percentage'  => $amount->percentage,
-                            'total'       => $amount->price->value,
+                            'identifier' => $amount->identifier,
+                            'percentage' => $amount->percentage,
+                            'total'      => $amount->price->value,
                         ];
                     })->values(),
                     'tax_total' => $line->taxAmount->value,
@@ -128,9 +127,9 @@ class CreateOrder
                     'tax_breakdown'    => $shippingAddress->taxBreakdown->amounts->map(function ($amount) {
                         return [
                             'description' => $amount->description,
-                            'identifier'  => $amount->identifier,
-                            'percentage'  => $amount->percentage,
-                            'total'       => $amount->price->value,
+                            'identifier' => $amount->identifier,
+                            'percentage' => $amount->percentage,
+                            'total'      => $amount->price->value,
                         ];
                     })->values(),
                     'tax_total' => $shippingAddress->shippingTaxTotal->value,
@@ -148,9 +147,7 @@ class CreateOrder
 
             $cart->save();
 
-            $pipeline->send($order)->via('created')->thenReturn();
-
-            return $order;
+            return $pipeline->send($order)->via('created')->thenReturn();
         });
     }
 

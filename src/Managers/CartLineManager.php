@@ -13,7 +13,7 @@ class CartLineManager
     /**
      * Initialize the cart manager.
      *
-     * @param \GetCandy\Models\CartLine $cartLine
+     * @param  \GetCandy\Models\CartLine  $cartLine
      */
     public function __construct(
         protected CartLine $cartLine
@@ -32,7 +32,7 @@ class CartLineManager
                 $this->getModifiers()->toArray()
             );
 
-        $pipeline->send($this->cartLine)->via('calculating')->thenReturn();
+        $this->cartLine = $pipeline->send($this->cartLine)->via('calculating')->thenReturn();
 
         $line = app(CalculateLine::class)->execute(
             $this->cartLine,
@@ -41,9 +41,7 @@ class CartLineManager
             $billingAddress
         );
 
-        $pipeline->send($line)->via('calculated')->thenReturn();
-
-        return $line;
+        return $pipeline->send($line)->via('calculated')->thenReturn();
     }
 
     /**
