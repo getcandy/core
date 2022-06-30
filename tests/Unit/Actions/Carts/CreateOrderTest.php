@@ -122,9 +122,9 @@ class CreateOrderTest extends TestCase
         $breakdown = $this->cart->taxBreakdown->map(function ($tax) {
             return [
                 'description'       => $tax['description'],
-                'identifier'        => $tax['identifier'],
-                'percentage'        => $tax['amounts']->sum('percentage'),
-                'total'             => $tax['total']->value,
+                'identifier'   => $tax['identifier'],
+                'percentage' => $tax['amounts']->sum('percentage'),
+                'total'      => $tax['total']->value,
             ];
         })->values();
 
