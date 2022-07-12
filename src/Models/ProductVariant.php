@@ -173,7 +173,7 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
             return $variantThumbnail->getUrl('small');
         }
 
-        if (! $this->product) {
+        if (!$this->product) {
             dD($this);
         }
         // dd($this->product);
