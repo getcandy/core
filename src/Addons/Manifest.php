@@ -43,13 +43,12 @@ class Manifest extends PackageManifest
     /**
      * Format a given composer package into our addon format.
      *
-     * @param array $package
-     *
+     * @param  array  $package
      * @return void|array
      */
     protected function formatPackage($package)
     {
-        if (!$provider = $package['extra']['laravel']['providers'][0] ?? null) {
+        if (! $provider = $package['extra']['laravel']['providers'][0] ?? null) {
             return;
         }
 
@@ -58,7 +57,7 @@ class Manifest extends PackageManifest
         $namespace = implode('\\', $providerParts);
         $autoload = $package['autoload']['psr-4'][$namespace.'\\'];
 
-        $directory = Str::remove($autoload, dirname($reflector->getFileName()));
+        $directory = Str::remove(rtrim($autoload, '/'), dirname($reflector->getFileName()));
         $json = json_decode(File::get($directory.'composer.json'), true);
 
         $getcandy = $json['extra']['getcandy'] ?? [];
