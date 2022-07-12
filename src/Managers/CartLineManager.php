@@ -13,7 +13,7 @@ class CartLineManager
     /**
      * Initialize the cart manager.
      *
-     * @param \GetCandy\Models\CartLine $cartLine
+     * @param  \GetCandy\Models\CartLine  $cartLine
      */
     public function __construct(
         protected CartLine $cartLine
@@ -31,7 +31,6 @@ class CartLineManager
             ->through(
                 $this->getModifiers()->toArray()
             );
-
         $this->cartLine = $pipeline->send($this->cartLine)->via('calculating')->thenReturn();
 
         $line = app(CalculateLine::class)->execute(
