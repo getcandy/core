@@ -5,6 +5,7 @@ namespace GetCandy\Models;
 use GetCandy\Base\BaseModel;
 use GetCandy\Base\Casts\Price;
 use GetCandy\Base\Casts\TaxBreakdown;
+use GetCandy\Base\Traits\HasMacros;
 use GetCandy\Base\Traits\LogsActivity;
 use GetCandy\Base\Traits\Searchable;
 use GetCandy\Database\Factories\OrderFactory;
@@ -12,9 +13,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends BaseModel
 {
-    use HasFactory;
-    use Searchable;
-    use LogsActivity;
+    use HasFactory,
+        Searchable,
+        LogsActivity,
+        HasMacros;
 
     /**
      * Define our base filterable attributes.
@@ -258,17 +260,17 @@ class Order extends BaseModel
     protected function getSearchableAttributes()
     {
         $data = [
-            'id'                 => $this->id,
-            'channel'            => $this->channel->name,
-            'reference'          => $this->reference,
+            'id'        => $this->id,
+            'channel'    => $this->channel->name,
+            'reference' => $this->reference,
             'customer_reference' => $this->customer_reference,
-            'status'             => $this->status,
-            'placed_at'          => optional($this->placed_at)->timestamp,
-            'created_at'         => $this->created_at->timestamp,
-            'sub_total'          => $this->sub_total->value,
-            'total'              => $this->total->value,
-            'currency_code'      => $this->currency_code,
-            'charges'            => $this->transactions->map(function ($transaction) {
+            'status'    => $this->status,
+            'placed_at' => optional($this->placed_at)->timestamp,
+            'created_at' => $this->created_at->timestamp,
+            'sub_total' => $this->sub_total->value,
+            'total'     => $this->total->value,
+            'currency_code'  => $this->currency_code,
+            'charges'   => $this->transactions->map(function ($transaction) {
                 return [
                     'reference' => $transaction->reference,
                 ];

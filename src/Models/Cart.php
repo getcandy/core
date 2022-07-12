@@ -4,6 +4,7 @@ namespace GetCandy\Models;
 
 use GetCandy\Base\BaseModel;
 use GetCandy\Base\Casts\Address;
+use GetCandy\Base\Traits\HasMacros;
 use GetCandy\Base\Traits\LogsActivity;
 use GetCandy\Database\Factories\CartFactory;
 use GetCandy\DataTypes\Price;
@@ -16,6 +17,7 @@ class Cart extends BaseModel
 {
     use HasFactory;
     use LogsActivity;
+    use HasMacros;
 
     /**
      * The cart total.
@@ -175,8 +177,7 @@ class Cart extends BaseModel
     /**
      * Apply scope to get active cart.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return void
      */
     public function scopeActive(Builder $query)

@@ -3,6 +3,7 @@
 namespace GetCandy\Models;
 
 use GetCandy\Base\BaseModel;
+use GetCandy\Base\Traits\HasMacros;
 use GetCandy\Base\Traits\HasMedia;
 use GetCandy\Database\Factories\ProductAssociationFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +13,7 @@ class ProductAssociation extends BaseModel
 {
     use HasFactory;
     use HasMedia;
+    use HasMacros;
 
     /**
      * Define the cross sell type.
@@ -72,8 +74,7 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the cross sell scope.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return void
      */
     public function scopeCrossSell(Builder $query)
@@ -84,8 +85,7 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the up sell scope.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return void
      */
     public function scopeUpSell(Builder $query)
@@ -96,8 +96,7 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the up alternate scope.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return void
      */
     public function scopeAlternate(Builder $query)
@@ -108,9 +107,8 @@ class ProductAssociation extends BaseModel
     /**
      * Apply the type scope.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string                                $type
-     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $type
      * @return void
      */
     public function scopeType(Builder $query, $type)
