@@ -10,6 +10,7 @@ use GetCandy\Base\Traits\HasMacros;
 use GetCandy\Base\Traits\HasMedia;
 use GetCandy\Base\Traits\HasPrices;
 use GetCandy\Base\Traits\HasTranslations;
+use GetCandy\Base\Traits\LogsActivity;
 use GetCandy\Database\Factories\ProductVariantFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Collection;
@@ -21,6 +22,7 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
     use HasMedia;
     use HasPrices;
     use HasDimensions;
+    use LogsActivity;
     use HasTranslations;
     use HasMacros;
 
@@ -173,7 +175,7 @@ class ProductVariant extends BaseModel implements SpatieHasMedia, Purchasable
             return $variantThumbnail->getUrl('small');
         }
 
-        if (!$this->product) {
+        if (! $this->product) {
             dD($this);
         }
         // dd($this->product);

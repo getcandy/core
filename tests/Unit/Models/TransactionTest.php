@@ -70,7 +70,7 @@ class TransactionTest extends TestCase
             $this->assertDatabaseHas(
                 (new Transaction())->getTable(),
                 [
-                    'id'        => $transaction->id,
+                    'id' => $transaction->id,
                     'last_four' => $check,
                 ]
             );

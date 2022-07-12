@@ -14,14 +14,14 @@ class OfflinePayment extends AbstractPayment
      */
     public function authorize(): PaymentAuthorize
     {
-        if (!$this->order) {
-            if (!$this->order = $this->cart->order) {
+        if (! $this->order) {
+            if (! $this->order = $this->cart->order) {
                 $this->order = $this->cart->getManager()->createOrder();
             }
         }
 
         $this->order->update([
-            'status'    => $this->config['authorized'] ?? null,
+            'status' => $this->config['authorized'] ?? null,
             'placed_at' => now(),
         ]);
 
