@@ -160,7 +160,7 @@ class GetCandyServiceProvider extends ServiceProvider
         $this->registerObservers();
         $this->registerBlueprintMacros();
 
-        if (!$this->app->environment('testing')) {
+        if (! $this->app->environment('testing')) {
             $this->registerStateListeners();
         }
 
@@ -170,6 +170,10 @@ class GetCandyServiceProvider extends ServiceProvider
                     "{$this->root}/config/$config.php" => config_path("getcandy/$config.php"),
                 ], 'getcandy');
             });
+
+            $this->publishes([
+                __DIR__.'/../database/migrations/' => database_path('migrations'),
+            ], 'getcandy-migrations');
 
             $this->commands([
                 InstallGetCandy::class,
