@@ -9,7 +9,8 @@ interface OrderReferenceGeneratorInterface
     /**
      * Generate a reference for the order.
      *
-     * @param  \GetCandy\Models\Order  $order
+     * @param \GetCandy\Models\Order $order
+     *
      * @return string
      */
     public function generate(Order $order): string;

@@ -53,14 +53,14 @@ class BaseModelTest extends TestCase
 
         $collection->urls()->create(
             Url::factory()->make([
-                'slug' => 'foo-collection',
+                'slug'    => 'foo-collection',
                 'default' => true,
             ])->toArray()
         );
 
         $product->urls()->create(
             Url::factory()->make([
-                'slug' => 'foo-product',
+                'slug'    => 'foo-product',
                 'default' => true,
             ])->toArray()
         );
