@@ -13,8 +13,9 @@ trait HasMacros
     /**
      * Handle dynamic method calls into the model.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -29,8 +30,9 @@ trait HasMacros
     /**
      * Handle dynamic static method calls into the model.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public static function __callStatic($method, $parameters)
