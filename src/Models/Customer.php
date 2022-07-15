@@ -53,7 +53,7 @@ class Customer extends BaseModel
      */
     protected $casts = [
         'attribute_data' => AsAttributeData::class,
-        'meta'           => 'object',
+        'meta' => 'object',
     ];
 
     /**
