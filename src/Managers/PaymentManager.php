@@ -16,11 +16,10 @@ class PaymentManager extends Manager
     /**
      * Create a new driver instance.
      *
-     * @param string $driver
+     * @param  string  $driver
+     * @return mixed
      *
      * @throws \InvalidArgumentException
-     *
-     * @return mixed
      */
     protected function createDriver($driver)
     {
@@ -55,8 +54,7 @@ class PaymentManager extends Manager
     /**
      * Build a tax provider instance.
      *
-     * @param string $provider
-     *
+     * @param  string  $provider
      * @return mixed
      */
     public function buildProvider($provider)
