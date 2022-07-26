@@ -92,7 +92,8 @@ class SystemTaxDriver implements TaxDriver
     /**
      * Set the cart line.
      *
-     * @param  CartLine  $cartLine
+     * @param CartLine $cartLine
+     *
      * @return self
      */
     public function setCartLine(CartLine $cartLine): self
@@ -111,7 +112,7 @@ class SystemTaxDriver implements TaxDriver
         $taxClass = $this->purchasable->getTaxClass();
         $taxAmounts = $taxZone->taxAmounts()->whereTaxClassId($taxClass->id)->get();
 
-        $breakdown = new TaxBreakdown;
+        $breakdown = new TaxBreakdown();
 
         foreach ($taxAmounts as $amount) {
             $result = round($subTotal * ($amount->percentage / 100));
