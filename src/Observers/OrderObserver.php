@@ -9,8 +9,7 @@ class OrderObserver
     /**
      * Handle the OrderLine "updated" event.
      *
-     * @param \GetCandy\Models\OrderLine $orderLine
-     *
+     * @param  \GetCandy\Models\OrderLine  $orderLine
      * @return void
      */
     public function updating(Order $order)
@@ -21,7 +20,7 @@ class OrderObserver
                 ->performedOn($order)
                 ->event('status-update')
                 ->withProperties([
-                    'new'      => $order->status,
+                    'new' => $order->status,
                     'previous' => $order->getOriginal('status'),
                 ])->log('status-update');
         }

@@ -9,8 +9,7 @@ class TransactionObserver
     /**
      * Handle the OrderLine "updated" event.
      *
-     * @param \GetCandy\Models\OrderLine $orderLine
-     *
+     * @param  \GetCandy\Models\OrderLine  $orderLine
      * @return void
      */
     public function created(Transaction $transaction)
@@ -20,13 +19,13 @@ class TransactionObserver
             ->performedOn($transaction->order)
             ->event($transaction->type)
             ->withProperties([
-                'amount'    => $transaction->amount->value,
-                'refund'    => $transaction->refund,
-                'status'    => $transaction->status,
+                'amount' => $transaction->amount->value,
+                'refund' => $transaction->refund,
+                'status' => $transaction->status,
                 'card_type' => $transaction->card_type,
                 'last_four' => $transaction->last_four,
                 'reference' => $transaction->reference,
-                'notes'     => $transaction->notes,
+                'notes' => $transaction->notes,
             ])->log('created');
     }
 }
