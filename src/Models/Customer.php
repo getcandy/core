@@ -81,7 +81,7 @@ class Customer extends BaseModel
      */
     public function getSearchableAttributes()
     {
-        $metaFields = (array) $this->meta;
+        $metaFields = config('getcandy-hub.customers.searchable_meta', []);
 
         $data = [
             'id'           => $this->id,
@@ -90,8 +90,8 @@ class Customer extends BaseModel
             'vat_no'       => $this->vat_no,
         ];
 
-        foreach ($metaFields as $key => $value) {
-            $data[$key] = $value;
+        foreach ($metaFields as $field) {
+            $data[$field] = optional($this->meta)->{$field};
         }
 
         foreach ($this->attribute_data ?? [] as $field => $value) {
