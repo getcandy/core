@@ -98,7 +98,7 @@ class CartTest extends TestCase
         $user = StubUser::factory()->create();
 
         $cart = Cart::create([
-            'order_id'    => Order::factory()->create()->id,
+            'order_id' => Order::factory()->create()->id,
             'currency_id' => $currency->id,
             'channel_id'  => $channel->id,
             'user_id'     => $user->getKey(),
