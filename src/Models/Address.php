@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Address extends BaseModel implements Addressable
 {
-    use HasFactory;
-    use HasMacros;
+    use HasFactory, HasMacros;
 
     /**
      * Return a new factory instance for the model.
@@ -38,14 +37,13 @@ class Address extends BaseModel implements Addressable
      */
     protected $casts = [
         'shipping_default' => 'boolean',
-        'billing_default'  => 'boolean',
+        'billing_default' => 'boolean',
     ];
 
     /**
      * Mutator for the meta attribute.
      *
-     * @param array|null $value
-     *
+     * @param  array|null  $value
      * @return void
      */
     public function setMetaAttribute(array $value = null)
@@ -58,8 +56,7 @@ class Address extends BaseModel implements Addressable
     /**
      * Accessor for the meta attribute.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return array
      */
     public function getMetaAttribute($value)
