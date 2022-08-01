@@ -30,8 +30,8 @@ class OrderLineFactory extends Factory
             'tax_breakdown'    => [
                 [
                     'description'       => 'VAT',
-                    'total'      => 200,
-                    'percentage' => 20,
+                    'total'             => 200,
+                    'percentage'        => 20,
                 ],
             ],
             'tax_total' => $this->faker->numberBetween(1, 5000),
