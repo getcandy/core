@@ -22,19 +22,18 @@ class CartSessionAuthListener
     /**
      * Handle the login event.
      *
-     * @param \Illuminate\Auth\Events\Login $event
-     *
+     * @param  \Illuminate\Auth\Events\Login  $event
      * @return void
      */
     public function login(Login $event)
     {
-        if (!is_getcandy_user($event->user)) {
+        if (! is_getcandy_user($event->user)) {
             return;
         }
 
         $currentCart = CartSession::current();
 
-        if ($currentCart && !$currentCart->user_id) {
+        if ($currentCart && ! $currentCart->user_id) {
             CartSession::associate(
                 $currentCart,
                 $event->user,
@@ -42,7 +41,7 @@ class CartSessionAuthListener
             );
         }
 
-        if (!$currentCart) {
+        if (! $currentCart) {
             // Does this user have a cart?
             $userCart = Cart::whereUserId($event->user->getKey())->active()->first();
 
@@ -55,13 +54,12 @@ class CartSessionAuthListener
     /**
      * Handle the logout event.
      *
-     * @param \Illuminate\Auth\Events\Logout $event
-     *
+     * @param  \Illuminate\Auth\Events\Logout  $event
      * @return void
      */
     public function logout(Logout $event)
     {
-        if (!is_getcandy_user($event->user)) {
+        if (! is_getcandy_user($event->user)) {
             return;
         }
 
