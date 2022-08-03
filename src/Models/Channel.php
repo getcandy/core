@@ -40,7 +40,8 @@ class Channel extends BaseModel
     /**
      * Mutator for formatting the handle to a slug.
      *
-     * @param  string  $val
+     * @param string $val
+     *
      * @return void
      */
     public function setHandleAttribute($val)
