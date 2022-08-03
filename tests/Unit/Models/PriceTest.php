@@ -67,7 +67,7 @@ class PriceTest extends TestCase
 
         $currencyGBP = Currency::factory()->create([
             'decimal_places' => 2,
-            'code'           => 'GBP',
+            'code' => 'GBP',
         ]);
 
         $price = Price::factory()->create([
@@ -84,7 +84,7 @@ class PriceTest extends TestCase
 
         $currencyUSD = Currency::factory()->create([
             'decimal_places' => 3,
-            'code'           => 'USD',
+            'code' => 'USD',
         ]);
 
         $price = Price::factory()->create([
@@ -212,12 +212,12 @@ class PriceTest extends TestCase
         ]);
 
         Price::factory()->create([
-            'currency_id'       => $currencyUSD->id,
+            'currency_id'    => $currencyUSD->id,
             'customer_group_id' => $customerGroup->id,
-            'priceable_id'      => $variant->id,
-            'priceable_type'    => ProductVariant::class,
-            'price'             => 75,
-            'tier'              => 1,
+            'priceable_id'   => $variant->id,
+            'priceable_type' => ProductVariant::class,
+            'price'          => 75,
+            'tier'           => 1,
         ]);
 
         // Check we get the default currency price
