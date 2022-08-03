@@ -154,7 +154,7 @@ class GetCandyServiceProvider extends ServiceProvider
         $this->registerObservers();
         $this->registerBlueprintMacros();
 
-        if (!$this->app->environment('testing')) {
+        if (! $this->app->environment('testing')) {
             $this->registerStateListeners();
         }
 

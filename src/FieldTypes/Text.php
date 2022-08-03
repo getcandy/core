@@ -26,7 +26,7 @@ class Text implements FieldType, JsonSerializable
     /**
      * Create a new instance of Text field type.
      *
-     * @param string $value
+     * @param  string  $value
      */
     public function __construct($value = '')
     {
@@ -56,11 +56,11 @@ class Text implements FieldType, JsonSerializable
     /**
      * Set the value of this field.
      *
-     * @param string $value
+     * @param  string  $value
      */
     public function setValue($value)
     {
-        if ($value && (!is_string($value) && !is_numeric($value) && !is_bool($value))) {
+        if ($value && (! is_string($value) && ! is_numeric($value) && ! is_bool($value))) {
             throw new FieldTypeException(self::class.' value must be a string.');
         }
 
@@ -100,6 +100,14 @@ class Text implements FieldType, JsonSerializable
             'view'    => 'adminhub::field-types.text',
             'options' => [
                 'richtext' => 'nullable',
+                'options' => [
+                    'nullable',
+                    function ($attribute, $value, $fail) {
+                        if (! json_decode($value, true)) {
+                            $fail('Must be valid json');
+                        }
+                    },
+                ],
             ],
         ];
     }
