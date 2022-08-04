@@ -9,8 +9,9 @@ class GenerateOrderReference
     /**
      * Execute the action.
      *
-     * @param  \GetCandy\Models\CartLine  $cartLine
-     * @param  \Illuminate\Database\Eloquent\Collection  $customerGroups
+     * @param \GetCandy\Models\CartLine                $cartLine
+     * @param \Illuminate\Database\Eloquent\Collection $customerGroups
+     *
      * @return \GetCandy\Models\CartLine
      */
     public function execute(
@@ -18,7 +19,7 @@ class GenerateOrderReference
     ) {
         $generator = config('getcandy.orders.reference_generator');
 
-        if (! $generator) {
+        if (!$generator) {
             return null;
         }
 
