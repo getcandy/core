@@ -23,7 +23,7 @@ class OrderReferenceGenerator implements OrderReferenceGeneratorInterface
             ->where('id', '!=', $order->id)
             ->first();
 
-        if (! $latest || ! $latest->reference) {
+        if (!$latest || !$latest->reference) {
             $increment = 1;
         } else {
             $segments = explode('-', $latest->reference);
