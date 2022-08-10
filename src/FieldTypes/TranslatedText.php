@@ -17,7 +17,7 @@ class TranslatedText implements FieldType, JsonSerializable
     /**
      * Create a new instance of TranslatedText field type.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection  $value
+     * @param \Illuminate\Database\Eloquent\Collection $value
      */
     public function __construct($value = null)
     {
@@ -51,7 +51,7 @@ class TranslatedText implements FieldType, JsonSerializable
     /**
      * Set the value of this field.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection  $value
+     * @param \Illuminate\Database\Eloquent\Collection $value
      */
     public function setValue($value)
     {
@@ -59,7 +59,7 @@ class TranslatedText implements FieldType, JsonSerializable
             $value = collect($value);
         }
 
-        if (! $value instanceof \Illuminate\Support\Collection) {
+        if (!$value instanceof \Illuminate\Support\Collection) {
             throw new FieldTypeException(self::class.' value must be a collection.');
         }
 
@@ -108,10 +108,10 @@ class TranslatedText implements FieldType, JsonSerializable
         return [
             'options' => [
                 'richtext' => 'nullable',
-                'options' => [
+                'options'  => [
                     'nullable',
                     function ($attribute, $value, $fail) {
-                        if (! json_decode($value, true)) {
+                        if (!json_decode($value, true)) {
                             $fail('Must be valid json');
                         }
                     },
