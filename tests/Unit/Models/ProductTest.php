@@ -48,22 +48,7 @@ class ProductTest extends TestCase
     {
         $expected = config('scout.prefix').'products';
 
-        $this->assertEquals($expected, (new Product())->searchableAs());
-    }
-
-    /** @test */
-    public function has_image_transformations_loaded_from_config()
-    {
-        $collection = Product::factory()->create();
-        $collection->registerAllMediaConversions();
-
-        $conversions = $collection->mediaConversions;
-
-        $this->assertIsArray($conversions);
-
-        $transforms = config('getcandy.media.transformations');
-
-        $this->assertCount(count($transforms), $conversions);
+        $this->assertEquals($expected, (new Product)->searchableAs());
     }
 
     /** @test */
