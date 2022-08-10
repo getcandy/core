@@ -40,20 +40,20 @@ class OrderObserverTest extends TestCase
             'status' => 'status-a',
         ]);
 
-        $this->assertDatabaseMissing((new Activity)->getTable(), [
+        $this->assertDatabaseMissing((new Activity())->getTable(), [
             'subject_id' => $order->id,
-            'event' => 'status-update',
+            'event'      => 'status-update',
         ]);
 
         $order->update([
             'status' => 'status-b',
         ]);
 
-        $this->assertDatabaseHas((new Activity)->getTable(), [
+        $this->assertDatabaseHas((new Activity())->getTable(), [
             'subject_id' => $order->id,
-            'event' => 'status-update',
+            'event'      => 'status-update',
             'properties' => json_encode([
-                'new' => 'status-b',
+                'new'      => 'status-b',
                 'previous' => 'status-a',
             ]),
         ]);
@@ -62,11 +62,11 @@ class OrderObserverTest extends TestCase
             'status' => 'status-b',
         ]);
 
-        $this->assertDatabaseMissing((new Activity)->getTable(), [
+        $this->assertDatabaseMissing((new Activity())->getTable(), [
             'subject_id' => $order->id,
-            'event' => 'status-update',
+            'event'      => 'status-update',
             'properties' => json_encode([
-                'new' => 'status-b',
+                'new'      => 'status-b',
                 'previous' => 'status-b',
             ]),
         ]);
@@ -74,11 +74,11 @@ class OrderObserverTest extends TestCase
         $order->status = 'status-c';
         $order->save();
 
-        $this->assertDatabaseHas((new Activity)->getTable(), [
+        $this->assertDatabaseHas((new Activity())->getTable(), [
             'subject_id' => $order->id,
-            'event' => 'status-update',
+            'event'      => 'status-update',
             'properties' => json_encode([
-                'new' => 'status-c',
+                'new'      => 'status-c',
                 'previous' => 'status-b',
             ]),
         ]);
